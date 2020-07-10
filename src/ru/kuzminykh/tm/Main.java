@@ -35,7 +35,6 @@ public class Main {
         System.out.println("about - Display developer info.");
         System.out.println("help - Display list of commands.");
         System.exit(0);
-
     }
 
     private static void displayVersion(){
