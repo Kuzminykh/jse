@@ -2,7 +2,7 @@ package ru.kuzminykh.tm;
 
 import static ru.kuzminykh.tm.constant.TerminalConst.*;
 
-public class Main {
+public class App {
 
     public static void main(final String[] args) {
         run(args);
