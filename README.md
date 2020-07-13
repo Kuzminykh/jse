@@ -1,18 +1,18 @@
-# Описание приложения task-manager
+# РћРїРёСЃР°РЅРёРµ РїСЂРёР»РѕР¶РµРЅРёСЏ task-manager
 
-## Приложение: task-manager
-## Требование software: Управление списком задач
-## Стек технологий: Java
-## Разработчик: Кузьминых Н.Н.
-## E-mail: kuzminykh_nn@nlmk.com
-##
-### Сборка приложения:   
-###   - mvn clean
-###   - mvn package
-###   - mvn install
-##
-### Запуск приложения: 
-###   - java -jar task-manager-1.0.0.jar
-###   - java -jar task-manager-1.0.0.jar about
-###   - java -jar task-manager-1.0.0.jar version
-###   - java -jar task-manager-1.0.0.jar help
+## РџСЂРёР»РѕР¶РµРЅРёРµ: task-manager
+## РўСЂРµР±РѕРІР°РЅРёРµ: РЈРїСЂР°РІР»РµРЅРёРµ СЃРїРёСЃРєРѕРј Р·Р°РґР°С‡
+## РЎС‚РµРє С‚РµС…РЅРѕР»РѕРіРёР№: Java
+## Р Р°Р·СЂР°Р±РѕС‚С‡РёРє: РљСѓР·СЊРјРёРЅС‹С… Рќ.Рќ.
+## e-mail: kuzminykh_nn@nlmk.com
+#
+### РЎР±РѕСЂРєР° РїСЂРёР»РѕР¶РµРЅРёСЏ: 
+### - mvn clean
+### - mvn package
+### - mvn install 
+#
+### Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ: 
+### - java -jar task-manager-1.0.0.jar
+### - java -jar task-manager-1.0.0.jar about
+### - java -jar task-manager-1.0.0.jar version
+### - java -jar task-manager-1.0.0.jar help
