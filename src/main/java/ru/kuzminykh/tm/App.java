@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static ru.kuzminykh.tm.constant.TerminalConst.*;
 
 /*
- * Тестовое приложение
+ * Учебный проект в рамках курса Java.
  */
 
 public class App {
@@ -13,11 +13,16 @@ public class App {
     public static void main(final String[] args) {
         run(args);
         displayWelcome();
+        process();
+    }
+
+    private static void process(){
         final Scanner scanner = new Scanner(System.in);
         String command = "";
         while(!EXIT.equals(command)){
             command = scanner.nextLine();
             run(command);
+            System.out.println();
         }
     }
 
@@ -30,7 +35,7 @@ public class App {
      }
 
     private static int run(final String param){
-        if (param == null) return -1;
+        if (param == null || param.isEmpty()) return -1;
         switch (param){
             case VERSION: return displayVersion();
             case ABOUT: return displayAbout();
@@ -49,7 +54,6 @@ public class App {
         System.out.println("Terminate program...");
         return 0;
     }
-
 
     private static void displayWelcome(){
         System.out.println("** WELCOME TO TASK MANAGER **");
