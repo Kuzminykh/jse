@@ -2,13 +2,22 @@
 ***
 Учебный проект в рамках курса Java.
 
+#### Требования К Hardware
+1. CPU i5 / i7
+2. RAM 16GB (8gb )
+3. LAN / WI-FI
+4. SSD 40GB (НDD)
+
 #### Требование к Software: 
-Java 11.0. 
+1. Java 11.0. 
+2. Apache Maven 3.6.3
+3. Java Open JDK 11
 
 #### Стек технологий:
 1. Java Open JDK 11
-2. Apache Maven 3.6.1
+2. Apache Maven 3.6.3
 3. Intellij Idea 2020.1.2
+4. Git 2.27.0
 
 #### Разработчик: 
  Кузьминых Н.Н.
