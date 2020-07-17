@@ -2,7 +2,7 @@
 ***
 Учебный проект в рамках курса Java.
 
-#### Требования К Hardware
+#### Требования к Hardware
 1. CPU i5 / i7
 2. RAM 16GB (8gb )
 3. LAN / WI-FI
