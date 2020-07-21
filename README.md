@@ -42,10 +42,9 @@ java -jar target/task-manager-1.0.0.jar
  * help - Отображение списка терминальных команд
  * exit - Выход из приложения
 ```
- 
-
- *` Настроено окружение для протокола SSH для отправки изменений в Git`*
- 
- *` Настроена сборка на CI/CD в Gitlab`*
- 
- *` Интегрирован аккаунт Gitlab с Github: `* https://github.com/Kuzminykh/jse
+ #
+- *`Настроено окружение для протокола SSH для отправки изменений в Git`*
+- *`Настроена сборка на CI/CD в Gitlab`*
+- *`Интегрирован аккаунт Gitlab с Github`*
+- *`Настроен Autopush из Gitlab в Github`* 
+- *`Ссылка на Github:`* https://github.com/Kuzminykh/jse
