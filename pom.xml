@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.kuzminykh.tm</groupId>
     <artifactId>task-manager</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
 
     <name>task-manager</name>
      <url>http://tm.kuzminykh.ru</url>
@@ -14,7 +14,7 @@
     <developers>
         <developer>
             <id>kuzminykh</id>
-            <email>kuzminykh_nn@nlmk.com</email>
+            <email>kuzminyh_nn@nlmk.com</email>
             <url>http://kuzminykh.ru</url>
         </developer>
     </developers>
