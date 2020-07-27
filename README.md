@@ -45,10 +45,22 @@ java -jar target/task-manager-1.0.7.jar
  * project-list - Отображение списка проектов
  * project-create - Создать новый проект по имени
  * project-clear - Удалить все проекты
-
+ * project-view-index - Просмотр проекта по индексу
+ * project-view-id - Просмотр проекта по коду
+ * project-remove-by-id - Удаление проекта по коду
+ * project-remove-by-index - Удаление проекта по индексу
+ * project-remove-by-name - Удаление проекта по имени
+ * project-update-by-index - Изменение проекта по индексу
+ 
  * task-list - Отображение списка задач
  * task-create - Создать новую задачу по имени
  * task-clear - Удалить все задачи
+ * task-view-index - Просмотр задачи по индексу
+ * task-view-id - Просмотр задачи по коду
+ * task-remove-by-id - Удаление задачи по коду
+ * task-remove-by-index - Удаление задачи по индексу
+ * task-remove-by-name - Удаление задачи по имени
+ * task-update-by-index - Изменение задачи по индексу
 ```
  #
 - *`Настроено окружение для протокола SSH для отправки изменений в Git`*

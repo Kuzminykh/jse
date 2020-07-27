@@ -28,7 +28,7 @@ public class Project {
     }
 
     public void setName(String name) {
-                this.name = name;
+        this.name = name;
     }
 
     public String getDescription() {
@@ -41,6 +41,6 @@ public class Project {
 
     @Override
     public String toString() {
-        return id + ": "+ name;
+        return id + ": " + name;
     }
 }
