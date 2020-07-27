@@ -2,6 +2,8 @@
 ***
 Учебный проект в рамках курса Java.
 
+*`Ссылка на Github:`* https://github.com/Kuzminykh/jse
+
 #### Требования к Hardware
 1. CPU i5 / i7
 2. RAM 16GB (8gb )
@@ -47,24 +49,27 @@ java -jar target/task-manager-1.0.7.jar
  * project-clear - Удалить все проекты
  * project-view-index - Просмотр проекта по индексу
  * project-view-id - Просмотр проекта по коду
- * project-remove-by-id - Удаление проекта по коду
  * project-remove-by-index - Удаление проекта по индексу
+ * project-remove-by-id - Удаление проекта по коду
  * project-remove-by-name - Удаление проекта по имени
  * project-update-by-index - Изменение проекта по индексу
+ * project-update-by-id - Изменение проекта по коду
  
+
  * task-list - Отображение списка задач
  * task-create - Создать новую задачу по имени
  * task-clear - Удалить все задачи
  * task-view-index - Просмотр задачи по индексу
  * task-view-id - Просмотр задачи по коду
- * task-remove-by-id - Удаление задачи по коду
  * task-remove-by-index - Удаление задачи по индексу
+ * task-remove-by-id - Удаление задачи по коду
  * task-remove-by-name - Удаление задачи по имени
  * task-update-by-index - Изменение задачи по индексу
+ * task-update-by-id - Изменение задачи по коду
 ```
  #
 - *`Настроено окружение для протокола SSH для отправки изменений в Git`*
 - *`Настроена сборка на CI/CD в Gitlab`*
 - *`Интегрирован аккаунт Gitlab с Github`*
 - *`Настроен Autopush из Gitlab в Github`* 
-- *`Ссылка на Github:`* https://github.com/Kuzminykh/jse
+

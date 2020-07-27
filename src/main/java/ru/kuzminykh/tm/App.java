@@ -69,6 +69,7 @@ public class App {
             case PROJECT_REMOVE_ID: return removeProjectById();
             case PROJECT_REMOVE_INDEX: return removeProjectByIndex();
             case PROJECT_UPDATE_INDEX: return updateProjectByIndex();
+            case PROJECT_UPDATE_ID: return updateProjectById();
 
             case TASK_LIST: return listTask();
             case TASK_CREATE: return createTask();
@@ -79,6 +80,7 @@ public class App {
             case TASK_REMOVE_ID: return removeTaskById();
             case TASK_REMOVE_INDEX: return removeTaskByIndex();
             case TASK_UPDATE_INDEX: return updateTaskByIndex();
+            case TASK_UPDATE_ID: return updateTaskById();
 
             default: return displayError();
         }
@@ -100,6 +102,24 @@ public class App {
         System.out.println("Enter, project index");
         final int index = Integer.parseInt(scanner.nextLine())-1;
         final Project project = projectDAO.findByIndex(index);
+        if (project == null) {
+            System.out.println("[FAIL]");
+            return 0;
+        }
+        System.out.println("[Please, enter project name:]");
+        final String name = scanner.nextLine();
+        System.out.println("[Please, enter project description:]");
+        final String description = scanner.nextLine();
+        projectDAO.update(project.getId(),name, description);
+        System.out.println("[OK]");
+        return 0;
+    }
+
+    private static int updateProjectById() {
+        System.out.println("[UPDATE PROJECT]");
+        System.out.println("Enter, project id");
+        final Long id = Long.parseLong(scanner.nextLine());
+        final Project project = projectDAO.findById(id);
         if (project == null) {
             System.out.println("[FAIL]");
             return 0;
@@ -216,6 +236,24 @@ public class App {
         return 0;
     }
 
+    private static int updateTaskById() {
+        System.out.println("[UPDATE TASK]");
+        System.out.println("Enter, task id");
+        final Long id = Long.parseLong(scanner.nextLine());
+        final Task task = taskDAO.findById(id);
+        if (task == null) {
+            System.out.println("[FAIL]");
+            return 0;
+        }
+        System.out.println("[Please, enter project name:]");
+        final String name = scanner.nextLine();
+        System.out.println("[Please, enter project description:]");
+        final String description = scanner.nextLine();
+        taskDAO.update(task.getId(),name, description);
+        System.out.println("[OK]");
+        return 0;
+    }
+
     private static int removeTaskByName() {
         System.out.println("[REMOVE TASK BY NAME]");
         System.out.println("[Please, enter task name:]");
@@ -319,6 +357,7 @@ public class App {
         System.out.println("project-remove-by-name - Remove project by name.");
         System.out.println("project-remove-by-index - Remove project by index.");
         System.out.println("project-update-by-index - Update project by index.");
+        System.out.println("project-update-by-id - Update project by id.");
         System.out.println();
         System.out.println("task-list - Display list of tasks.");
         System.out.println("task-create - Create new task by name.");
@@ -329,6 +368,7 @@ public class App {
         System.out.println("task-remove-by-name - Remove task by name.");
         System.out.println("task-remove-by-index - Remove task by index.");
         System.out.println("task-update-by-index - Update task by index.");
+        System.out.println("task-update-by-id - Update task by id.");
         return 0;
     }
 

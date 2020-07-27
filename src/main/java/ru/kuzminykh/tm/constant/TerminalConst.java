@@ -15,6 +15,7 @@ public class TerminalConst {
     public static final String PROJECT_REMOVE_NAME = "project-remove-by-name";
     public static final String PROJECT_REMOVE_INDEX = "project-remove-by-index";
     public static final String PROJECT_UPDATE_INDEX = "project-update-by-index";
+    public static final String PROJECT_UPDATE_ID = "project-update-by-id";
 
     public static final String TASK_CREATE = "task-create";
     public static final String TASK_CLEAR = "task-clear";
@@ -25,5 +26,6 @@ public class TerminalConst {
     public static final String TASK_REMOVE_NAME = "task-remove-by-name";
     public static final String TASK_REMOVE_INDEX = "task-remove-by-index";
     public static final String TASK_UPDATE_INDEX = "task-update-by-index";
+    public static final String TASK_UPDATE_ID = "task-update-by-id";
 
 }
