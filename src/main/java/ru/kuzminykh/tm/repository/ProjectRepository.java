@@ -1,14 +1,13 @@
-package ru.kuzminykh.tm.dao;
+package ru.kuzminykh.tm.repository;
 
 import ru.kuzminykh.tm.entity.Project;
-import ru.kuzminykh.tm.entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectDAO {
+public class ProjectRepository {
 
-    private List<Project> projects = new ArrayList<>();
+    private final List<Project> projects = new ArrayList<>();
 
     public Project create(final String name){
         final Project project = new Project(name);
@@ -43,7 +42,6 @@ public class ProjectDAO {
     }
 
     public Project findByName(final String name){
-        if (name == null || name.isEmpty()) return null;
         for (final Project project: projects) {
             if (project.getName().equals(name)) return project;
         }
@@ -51,7 +49,6 @@ public class ProjectDAO {
     }
 
     public  Project findById(final Long id){
-        if (id == null) return null;
         for (final Project project: projects) {
             if (project.getId().equals(id)) return project;
         }
@@ -81,15 +78,6 @@ public class ProjectDAO {
 
     public List<Project> findALL(){
         return projects;
-    }
-
-    public static void main(String[] args){
-        final ProjectDAO projectDAO = new ProjectDAO();
-        projectDAO.create("Demo");
-        projectDAO.create("Test");
-        System.out.println(projectDAO.findALL());
-        projectDAO.clear();
-        System.out.println(projectDAO.findALL());
     }
 
 }

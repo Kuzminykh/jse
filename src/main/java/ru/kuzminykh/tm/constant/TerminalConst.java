@@ -27,5 +27,4 @@ public class TerminalConst {
     public static final String TASK_REMOVE_INDEX = "task-remove-by-index";
     public static final String TASK_UPDATE_INDEX = "task-update-by-index";
     public static final String TASK_UPDATE_ID = "task-update-by-id";
-
 }
