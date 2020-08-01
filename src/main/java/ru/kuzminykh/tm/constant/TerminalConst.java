@@ -1,5 +1,7 @@
 package ru.kuzminykh.tm.constant;
 
+import ru.kuzminykh.tm.entity.Project;
+
 public class TerminalConst {
     public static final String HELP = "help";
     public static final String VERSION = "version";
@@ -27,4 +29,8 @@ public class TerminalConst {
     public static final String TASK_REMOVE_INDEX = "task-remove-by-index";
     public static final String TASK_UPDATE_INDEX = "task-update-by-index";
     public static final String TASK_UPDATE_ID = "task-update-by-id";
+    public static final String TASK_LIST_BY_PROJECT_ID = "task-list-by-project-id";
+    public static final String TASK_ADD_TO_PROJECT_BY_IDS = "task-add-to-project-by-ids";
+    public static final String TASK_REMOVE_FROM_PROJECT_BY_IDS = "task-remove-form-project-by-ids";
+
 }

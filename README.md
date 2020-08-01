@@ -48,24 +48,28 @@ java -jar target/task-manager-1.0.7.jar
  * project-create - Создать новый проект по имени
  * project-clear - Удалить все проекты
  * project-view-index - Просмотр проекта по индексу
- * project-view-id - Просмотр проекта по коду
+ * project-view-id - Просмотр проекта по идентификатору
  * project-remove-by-index - Удаление проекта по индексу
- * project-remove-by-id - Удаление проекта по коду
+ * project-remove-by-id - Удаление проекта по идентификатору
  * project-remove-by-name - Удаление проекта по имени
  * project-update-by-index - Изменение проекта по индексу
- * project-update-by-id - Изменение проекта по коду
+ * project-update-by-id - Изменение проекта по идентификатору
  
 
  * task-list - Отображение списка задач
  * task-create - Создать новую задачу по имени
  * task-clear - Удалить все задачи
  * task-view-index - Просмотр задачи по индексу
- * task-view-id - Просмотр задачи по коду
+ * task-view-id - Просмотр задачи по идентификатору
  * task-remove-by-index - Удаление задачи по индексу
- * task-remove-by-id - Удаление задачи по коду
+ * task-remove-by-id - Удаление задачи по идентификатору
  * task-remove-by-name - Удаление задачи по имени
  * task-update-by-index - Изменение задачи по индексу
- * task-update-by-id - Изменение задачи по коду
+ * task-update-by-id - Изменение задачи по идентификатору
+
+ * task-list-by-project-id - Отображение списка задач по идентификатору проекта
+ * task-add-to-project-by-ids - Добавить задачу в проект по идентификатору
+ * task-remove-form-project-by-ids - Удалить задачу из проекта по идентификатору
 ```
  #
 - *`Настроено окружение для протокола SSH для отправки изменений в Git`*

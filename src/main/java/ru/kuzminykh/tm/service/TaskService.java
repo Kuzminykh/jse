@@ -36,8 +36,7 @@ public class TaskService {
     }
 
     public Task findByIndex(final int index) {
-        if (index <= 0) return null;
-        return taskRepository.findByIndex(index);
+         return taskRepository.findByIndex(index);
     }
 
     public Task findByName(final String name) {
@@ -51,7 +50,6 @@ public class TaskService {
     }
 
     public Task removeByIndex(final int index) {
-        if (index <= 0) return null;
         return taskRepository.removeByIndex(index);
     }
 
@@ -67,6 +65,16 @@ public class TaskService {
 
     public List<Task> findALL() {
         return taskRepository.findALL();
+    }
+
+    public Task findByProjectIdAndId(Long projectId, Long id) {
+        if (projectId == null || id == null) return null;
+        return taskRepository.findByProjectIdAndId(projectId, id);
+    }
+
+    public List<Task> findAllByProjectId(Long projectId) {
+        if (projectId == null) return null;
+        return taskRepository.findAllByProjectId(projectId);
     }
 
 }
