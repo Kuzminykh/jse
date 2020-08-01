@@ -7,24 +7,24 @@ import java.util.List;
 
 public class TaskService {
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
-    public Task create(String name) {
+    public Task create(final String name) {
         if (name == null || name.isEmpty()) return null;
         return taskRepository.create(name);
     }
 
-    public Task create(String name, String description) {
+    public Task create(final String name, final String description) {
         if (name == null || name.isEmpty()) return null;
         if (description == null || description.isEmpty()) return null;
         return taskRepository.create(name, description);
     }
 
-    public Task update(Long id, String name, String description) {
+    public Task update(final Long id, final String name, final String description) {
         if (id == null) return null;
         if (name == null || name.isEmpty()) return null;
         if (description == null || description.isEmpty()) return null;
@@ -35,32 +35,32 @@ public class TaskService {
         taskRepository.clear();
     }
 
-    public Task findByIndex(int index) {
+    public Task findByIndex(final int index) {
         if (index <= 0) return null;
         return taskRepository.findByIndex(index);
     }
 
-    public Task findByName(String name) {
+    public Task findByName(final String name) {
         if (name == null || name.isEmpty()) return null;
         return taskRepository.findByName(name);
     }
 
-    public Task findById(Long id) {
+    public Task findById(final Long id) {
         if (id == null) return null;
         return taskRepository.findById(id);
     }
 
-    public Task removeByIndex(int index) {
+    public Task removeByIndex(final int index) {
         if (index <= 0) return null;
         return taskRepository.removeByIndex(index);
     }
 
-    public Task removeById(Long id) {
+    public Task removeById(final Long id) {
         if (id == null) return null;
         return taskRepository.removeById(id);
     }
 
-    public Task removeByName(String name) {
+    public Task removeByName(final String name) {
         if (name == null || name.isEmpty()) return null;
         return taskRepository.removeByName(name);
     }

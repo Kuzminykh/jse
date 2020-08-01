@@ -2,41 +2,52 @@ package ru.kuzminykh.tm.controller;
 
 import ru.kuzminykh.tm.repository.TaskRepository;
 import ru.kuzminykh.tm.entity.Task;
+import ru.kuzminykh.tm.service.TaskService;
 
 public class TaskController extends AbstractController {
 
-    private final TaskRepository taskRepository;
+    private final TaskService taskService;
 
-    public TaskController(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     public int createTask() {
         System.out.println("[CREATE TASK]");
-        System.out.println("[Please, enter task name:]");
+        System.out.println("Please, enter task name:");
         final String name = scanner.nextLine();
-        System.out.println("[Please, enter task description:]");
+        System.out.println("Please, enter task description:");
         final String description = scanner.nextLine();
-        taskRepository.create(name, description);
+        taskService.create(name, description);
         System.out.println("[OK]");
         return 0;
+    }
+
+    public void updateTask(Task task) {
+        System.out.println("Please, enter task name:");
+        final String name = scanner.nextLine();
+        System.out.println("Please, enter task description:");
+        final String description = scanner.nextLine();
+        taskService.update(task.getId(), name, description);
+        System.out.println("[OK]");
     }
 
     public int updateTaskByIndex() {
         System.out.println("[UPDATE TASK]");
         System.out.println("Enter, task index");
-        final int index = Integer.parseInt(scanner.nextLine())-1;
-        final Task task = taskRepository.findByIndex(index);
+        if (!scanner.hasNextInt()) {
+            scanner.nextLine();
+            System.out.println("FAIL! IT'S NOT NUMBER");
+            return -1;
+        }
+        final int index = scanner.nextInt() - 1;
+        scanner.nextLine();
+        final Task task = taskService.findByIndex(index);
         if (task == null) {
             System.out.println("[FAIL]");
             return 0;
         }
-        System.out.println("[Please, enter task name:]");
-        final String name = scanner.nextLine();
-        System.out.println("[Please, enter task description:]");
-        final String description = scanner.nextLine();
-        taskRepository.update(task.getId(),name, description);
-        System.out.println("[OK]");
+        updateTask(task);
         return 0;
     }
 
@@ -44,25 +55,20 @@ public class TaskController extends AbstractController {
         System.out.println("[UPDATE TASK]");
         System.out.println("Enter, task id");
         final Long id = Long.parseLong(scanner.nextLine());
-        final Task task = taskRepository.findById(id);
+        final Task task = taskService.findById(id);
         if (task == null) {
             System.out.println("[FAIL]");
             return 0;
         }
-        System.out.println("[Please, enter project name:]");
-        final String name = scanner.nextLine();
-        System.out.println("[Please, enter project description:]");
-        final String description = scanner.nextLine();
-        taskRepository.update(task.getId(),name, description);
-        System.out.println("[OK]");
+        updateTask(task);
         return 0;
     }
 
     public int removeTaskByName() {
         System.out.println("[REMOVE TASK BY NAME]");
-        System.out.println("[Please, enter task name:]");
+        System.out.println("Please, enter task name:");
         final String name = scanner.nextLine();
-        final Task task = taskRepository.removeByName(name);
+        final Task task = taskService.removeByName(name);
         if (task == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -70,9 +76,9 @@ public class TaskController extends AbstractController {
 
     public int removeTaskById() {
         System.out.println("[REMOVE TASK BY ID]");
-        System.out.println("[Please, enter task id:]");
+        System.out.println("Please, enter task id:");
         final Long id = scanner.nextLong();
-        final Task task = taskRepository.removeById(id);
+        final Task task = taskService.removeById(id);
         if (task == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -80,9 +86,9 @@ public class TaskController extends AbstractController {
 
     public int removeTaskByIndex() {
         System.out.println("[REMOVE TASK BY INDEX]");
-        System.out.println("[Please, enter task index:]");
+        System.out.println("Please, enter task index:");
         final int index = scanner.nextInt() - 1;
-        final Task task = taskRepository.removeByIndex(index);
+        final Task task = taskService.removeByIndex(index);
         if (task == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -90,7 +96,7 @@ public class TaskController extends AbstractController {
 
     public int clearTask() {
         System.out.println("[CLEAR TASK]");
-        taskRepository.clear();
+        taskService.clear();
         System.out.println("[OK]");
         return 0;
     }
@@ -106,8 +112,13 @@ public class TaskController extends AbstractController {
 
     public int viewTaskByIndex() {
         System.out.println("Enter, task index");
+        if (!scanner.hasNextInt()) {
+            scanner.nextLine();
+            System.out.println("FAIL! IT'S NOT NUMBER");
+            return -1;
+        }
         final int index = scanner.nextInt() - 1;
-        final Task task = taskRepository.findByIndex(index);
+        final Task task = taskService.findByIndex(index);
         viewTask(task);
         return 0;
     }
@@ -115,7 +126,7 @@ public class TaskController extends AbstractController {
     public int viewTaskById() {
         System.out.println("Enter, task id");
         final Long id = scanner.nextLong();
-        final Task task = taskRepository.findById(id);
+        final Task task = taskService.findById(id);
         viewTask(task);
         return 0;
     }
@@ -123,14 +134,13 @@ public class TaskController extends AbstractController {
     public int listTask() {
         System.out.println("[LIST TASK]");
         int index = 1;
-        for (final Task task : taskRepository.findALL()) {
-            System.out.println(index + ". " + task.getId() + ": " + task.getName());
+        for (final Task task : taskService.findALL()) {
+            System.out.println(index + ". " + task.getId() + ": " + task.getName() + " (Description: " + task.getDescription() + ")");
             index++;
         }
         System.out.println();
         System.out.println("[OK]");
         return 0;
     }
-
 
 }

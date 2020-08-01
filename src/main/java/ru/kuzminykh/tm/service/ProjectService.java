@@ -7,24 +7,24 @@ import java.util.List;
 
 public class ProjectService {
 
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
     public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
-    public Project create(String name) {
+    public Project create(final String name) {
         if (name == null || name.isEmpty()) return null;
         return projectRepository.create(name);
     }
 
-    public Project create(String name, String description) {
+    public Project create(final String name, final String description) {
         if (name == null || name.isEmpty()) return null;
         if (description == null || description.isEmpty()) return null;
         return projectRepository.create(name, description);
     }
 
-    public Project update(Long id, String name, String description) {
+    public Project update(final Long id, final String name, final String description) {
         if (id == null) return null;
         if (name == null || name.isEmpty()) return null;
         if (description == null || description.isEmpty()) return null;
@@ -35,30 +35,30 @@ public class ProjectService {
         projectRepository.clear();
     }
 
-    public Project findByIndex(int index) {
+    public Project findByIndex(final int index) {
         return projectRepository.findByIndex(index);
     }
 
-    public Project findByName(String name) {
+    public Project findByName(final String name) {
         if (name == null || name.isEmpty()) return null;
         return projectRepository.findByName(name);
     }
 
-    public Project findById(Long id) {
+    public Project findById(final Long id) {
         if (id == null) return null;
         return projectRepository.findById(id);
     }
 
-    public Project removeByIndex(int index) {
+    public Project removeByIndex(final int index) {
         return projectRepository.removeByIndex(index);
     }
 
-    public Project removeById(Long id) {
+    public Project removeById(final Long id) {
         if (id == null) return null;
         return projectRepository.removeById(id);
     }
 
-    public Project removeByName(String name) {
+    public Project removeByName(final String name) {
         if (name == null || name.isEmpty()) return null;
         return projectRepository.removeByName(name);
     }

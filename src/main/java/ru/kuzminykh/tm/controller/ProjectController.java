@@ -2,41 +2,52 @@ package ru.kuzminykh.tm.controller;
 
 import ru.kuzminykh.tm.repository.ProjectRepository;
 import ru.kuzminykh.tm.entity.Project;
+import ru.kuzminykh.tm.service.ProjectService;
 
 public class ProjectController extends AbstractController {
 
-    private final ProjectRepository projectRepository;
+    private final ProjectService projectService;
 
-    public ProjectController(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
     }
 
     public int createProject() {
         System.out.println("[CREATE PROJECT]");
-        System.out.println("[Please, enter project name:]");
+        System.out.println("Please, enter project name:");
         final String name = scanner.nextLine();
-        System.out.println("[Please, enter project description:]");
+        System.out.println("Please, enter project description:");
         final String description = scanner.nextLine();
-        projectRepository.create(name, description);
+        projectService.create(name, description);
         System.out.println("[OK]");
         return 0;
+    }
+
+    public void updateProject(Project project) {
+        System.out.println("Please, enter project name:");
+        final String name = scanner.nextLine();
+        System.out.println("Please, enter project description:");
+        final String description = scanner.nextLine();
+        projectService.update(project.getId(), name, description);
+        System.out.println("[OK]");
     }
 
     public int updateProjectByIndex() {
         System.out.println("[UPDATE PROJECT]");
         System.out.println("Enter, project index");
-        final int index = Integer.parseInt(scanner.nextLine())-1;
-        final Project project = projectRepository.findByIndex(index);
+        if (!scanner.hasNextInt()) {
+            scanner.nextLine();
+            System.out.println("FAIL! IT'S NOT NUMBER");
+            return -1;
+        }
+        final int index = scanner.nextInt() - 1;
+        scanner.nextLine();
+        final Project project = projectService.findByIndex(index);
         if (project == null) {
             System.out.println("[FAIL]");
             return 0;
         }
-        System.out.println("[Please, enter project name:]");
-        final String name = scanner.nextLine();
-        System.out.println("[Please, enter project description:]");
-        final String description = scanner.nextLine();
-        projectRepository.update(project.getId(),name, description);
-        System.out.println("[OK]");
+        updateProject(project);
         return 0;
     }
 
@@ -44,25 +55,20 @@ public class ProjectController extends AbstractController {
         System.out.println("[UPDATE PROJECT]");
         System.out.println("Enter, project id");
         final Long id = Long.parseLong(scanner.nextLine());
-        final Project project = projectRepository.findById(id);
+        final Project project = projectService.findById(id);
         if (project == null) {
             System.out.println("[FAIL]");
             return 0;
         }
-        System.out.println("[Please, enter project name:]");
-        final String name = scanner.nextLine();
-        System.out.println("[Please, enter project description:]");
-        final String description = scanner.nextLine();
-        projectRepository.update(project.getId(),name, description);
-        System.out.println("[OK]");
+        updateProject(project);
         return 0;
     }
 
     public int removeProjectByName() {
         System.out.println("[REMOVE PROJECT BY NAME]");
-        System.out.println("[Please, enter project name:]");
+        System.out.println("Please, enter project name:");
         final String name = scanner.nextLine();
-        final Project project = projectRepository.removeByName(name);
+        final Project project = projectService.removeByName(name);
         if (project == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -70,9 +76,9 @@ public class ProjectController extends AbstractController {
 
     public int removeProjectById() {
         System.out.println("[REMOVE PROJECT BY ID]");
-        System.out.println("[Please, enter project id:]");
+        System.out.println("Please, enter project id:");
         final Long id = scanner.nextLong();
-        final Project project = projectRepository.removeById(id);
+        final Project project = projectService.removeById(id);
         if (project == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -80,9 +86,9 @@ public class ProjectController extends AbstractController {
 
     public int removeProjectByIndex() {
         System.out.println("[REMOVE PROJECT BY INDEX]");
-        System.out.println("[Please, enter project index:]");
+        System.out.println("Please, enter project index:");
         final int index = scanner.nextInt() - 1;
-        final Project project = projectRepository.removeByIndex(index);
+        final Project project = projectService.removeByIndex(index);
         if (project == null) System.out.println("[FAIL]");
         else System.out.println("[OK]");
         return 0;
@@ -90,7 +96,7 @@ public class ProjectController extends AbstractController {
 
     public int clearProject() {
         System.out.println("[CLEAR PROJECT]");
-        projectRepository.clear();
+        projectService.clear();
         System.out.println("[OK]");
         return 0;
     }
@@ -98,8 +104,8 @@ public class ProjectController extends AbstractController {
     public int listProject() {
         System.out.println("[LIST PROJECT]");
         int index = 1;
-        for (final Project project : projectRepository.findALL()) {
-            System.out.println(index + ". " + project.getId() + ": " + project.getName());
+        for (final Project project : projectService.findALL()) {
+            System.out.println(index + ". " + project.getId() + ": " + project.getName() + " (Description: " + project.getDescription() + ")");
             index++;
         }
         System.out.println();
@@ -118,16 +124,21 @@ public class ProjectController extends AbstractController {
 
     public int viewProjectByIndex() {
         System.out.println("Enter, project index");
-        final int index = scanner.nextInt()-1;
-        final Project project = projectRepository.findByIndex(index);
+        if (!scanner.hasNextInt()) {
+            scanner.nextLine();
+            System.out.println("FAIL! IT'S NOT NUMBER");
+            return -1;
+        }
+        final int index = scanner.nextInt() - 1;
+        final Project project = projectService.findByIndex(index);
         viewProject(project);
         return 0;
     }
 
-    public  int viewProjectById() {
+    public int viewProjectById() {
         System.out.println("Enter, project id");
         final Long id = scanner.nextLong();
-        final Project project = projectRepository.findById(id);
+        final Project project = projectService.findById(id);
         viewProject(project);
         return 0;
     }

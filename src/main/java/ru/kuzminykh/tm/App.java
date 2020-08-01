@@ -6,6 +6,8 @@ import ru.kuzminykh.tm.controller.TaskController;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 
 import ru.kuzminykh.tm.repository.TaskRepository;
+import ru.kuzminykh.tm.service.ProjectService;
+import ru.kuzminykh.tm.service.TaskService;
 
 import java.util.Scanner;
 
@@ -21,17 +23,24 @@ public class App {
 
     private final TaskRepository taskRepository = new TaskRepository();
 
-    private final ProjectController projectController = new ProjectController(projectRepository);
+    private final ProjectService projectService = new ProjectService(projectRepository);
 
-    private final TaskController taskController = new TaskController(taskRepository);
+    private final TaskService taskService = new TaskService(taskRepository);
+
+    private final ProjectController projectController = new ProjectController(projectService);
+
+    private final TaskController taskController = new TaskController(taskService);
 
     private final SystemController systemController = new SystemController();
 
-     {
-        projectRepository.create("Demo Project 1");
-        projectRepository.create("Demo Project 2");
-        taskRepository.create("Test Task 1");
-        taskRepository.create("Test Task 2");
+    {
+        projectRepository.create("Demo Project 1", "prj01");
+        projectRepository.create("Demo Project 2", "prj02");
+        projectRepository.create("Demo Project 3", "prj03");
+
+        taskRepository.create("Test Task 1", "tsk01");
+        taskRepository.create("Test Task 2", "tsk02");
+        taskRepository.create("Test Task 3", "tsk03");
     }
 
     public static void main(final String[] args) {
@@ -62,34 +71,59 @@ public class App {
     public int run(final String param) {
         if (param == null || param.isEmpty()) return -1;
         switch (param) {
-            case VERSION: return systemController.displayVersion();
-            case ABOUT: return systemController.displayAbout();
-            case HELP: return systemController.displayHelp();
-            case EXIT: return systemController.displayExit();
+            case VERSION:
+                return systemController.displayVersion();
+            case ABOUT:
+                return systemController.displayAbout();
+            case HELP:
+                return systemController.displayHelp();
+            case EXIT:
+                return systemController.displayExit();
 
-            case PROJECT_LIST: return projectController.listProject();
-            case PROJECT_CREATE: return projectController.createProject();
-            case PROJECT_CLEAR: return projectController.clearProject();
-            case PROJECT_VIEW_INDEX: return projectController.viewProjectByIndex();
-            case PROJECT_VIEW_ID: return projectController.viewProjectById();
-            case PROJECT_REMOVE_NAME: return projectController.removeProjectByName();
-            case PROJECT_REMOVE_ID: return projectController.removeProjectById();
-            case PROJECT_REMOVE_INDEX: return projectController.removeProjectByIndex();
-            case PROJECT_UPDATE_INDEX: return projectController.updateProjectByIndex();
-            case PROJECT_UPDATE_ID: return projectController.updateProjectById();
+            case PROJECT_LIST:
+                return projectController.listProject();
+            case PROJECT_CREATE:
+                return projectController.createProject();
+            case PROJECT_CLEAR:
+                return projectController.clearProject();
+            case PROJECT_VIEW_INDEX:
+                return projectController.viewProjectByIndex();
+            case PROJECT_VIEW_ID:
+                return projectController.viewProjectById();
+            case PROJECT_REMOVE_NAME:
+                return projectController.removeProjectByName();
+            case PROJECT_REMOVE_ID:
+                return projectController.removeProjectById();
+            case PROJECT_REMOVE_INDEX:
+                return projectController.removeProjectByIndex();
+            case PROJECT_UPDATE_INDEX:
+                return projectController.updateProjectByIndex();
+            case PROJECT_UPDATE_ID:
+                return projectController.updateProjectById();
 
-            case TASK_LIST: return taskController.listTask();
-            case TASK_CREATE: return taskController.createTask();
-            case TASK_CLEAR: return taskController.clearTask();
-            case TASK_VIEW_INDEX: return taskController.viewTaskByIndex();
-            case TASK_VIEW_ID: return taskController.viewTaskById();
-            case TASK_REMOVE_NAME: return taskController.removeTaskByName();
-            case TASK_REMOVE_ID: return taskController.removeTaskById();
-            case TASK_REMOVE_INDEX: return taskController.removeTaskByIndex();
-            case TASK_UPDATE_INDEX: return taskController.updateTaskByIndex();
-            case TASK_UPDATE_ID: return taskController.updateTaskById();
+            case TASK_LIST:
+                return taskController.listTask();
+            case TASK_CREATE:
+                return taskController.createTask();
+            case TASK_CLEAR:
+                return taskController.clearTask();
+            case TASK_VIEW_INDEX:
+                return taskController.viewTaskByIndex();
+            case TASK_VIEW_ID:
+                return taskController.viewTaskById();
+            case TASK_REMOVE_NAME:
+                return taskController.removeTaskByName();
+            case TASK_REMOVE_ID:
+                return taskController.removeTaskById();
+            case TASK_REMOVE_INDEX:
+                return taskController.removeTaskByIndex();
+            case TASK_UPDATE_INDEX:
+                return taskController.updateTaskByIndex();
+            case TASK_UPDATE_ID:
+                return taskController.updateTaskById();
 
-            default: return systemController.displayError();
+            default:
+                return systemController.displayError();
         }
     }
 
