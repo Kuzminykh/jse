@@ -1,15 +1,22 @@
 package ru.kuzminykh.tm.controller;
 
+import ru.kuzminykh.tm.entity.Task;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 import ru.kuzminykh.tm.entity.Project;
 import ru.kuzminykh.tm.service.ProjectService;
+import ru.kuzminykh.tm.service.ProjectTaskService;
+
+import java.util.List;
 
 public class ProjectController extends AbstractController {
 
     private final ProjectService projectService;
 
-    public ProjectController(ProjectService projectService) {
+    private final ProjectTaskService projectTaskService;
+
+    public ProjectController(ProjectService projectService, ProjectTaskService projectTaskService) {
         this.projectService = projectService;
+        this.projectTaskService = projectTaskService;
     }
 
     public int createProject() {
@@ -64,13 +71,21 @@ public class ProjectController extends AbstractController {
         return 0;
     }
 
-    public int removeProjectByName() {
-        System.out.println("[REMOVE PROJECT BY NAME]");
-        System.out.println("Please, enter project name:");
-        final String name = scanner.nextLine();
-        final Project project = projectService.removeByName(name);
+    public void removeProject(Project project){
+        final List<Task> tasks = projectTaskService.findAllByProjectId(project.getId());
+        for (final Task task : tasks) {
+            projectTaskService.removeTaskToProject(project.getId(), task.getId());
+        }
+        System.out.println("[OK]");
+    }
+
+    public int removeProjectByIndex() {
+        System.out.println("[REMOVE PROJECT BY INDEX]");
+        System.out.println("Please, enter project index:");
+        final int index = scanner.nextInt() - 1;
+        final Project project = projectService.removeByIndex(index);
         if (project == null) System.out.println("[FAIL]");
-        else System.out.println("[OK]");
+        else removeProject(project);
         return 0;
     }
 
@@ -80,17 +95,17 @@ public class ProjectController extends AbstractController {
         final Long id = scanner.nextLong();
         final Project project = projectService.removeById(id);
         if (project == null) System.out.println("[FAIL]");
-        else System.out.println("[OK]");
+        else removeProject(project);
         return 0;
     }
 
-    public int removeProjectByIndex() {
-        System.out.println("[REMOVE PROJECT BY INDEX]");
-        System.out.println("Please, enter project index:");
-        final int index = scanner.nextInt() - 1;
-        final Project project = projectService.removeByIndex(index);
+    public int removeProjectByName() {
+        System.out.println("[REMOVE PROJECT BY NAME]");
+        System.out.println("Please, enter project name:");
+        final String name = scanner.nextLine();
+        final Project project = projectService.removeByName(name);
         if (project == null) System.out.println("[FAIL]");
-        else System.out.println("[OK]");
+        else removeProject(project);
         return 0;
     }
 

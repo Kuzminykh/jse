@@ -19,7 +19,7 @@ public class ProjectTaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> findAddByProjectId(final Long projectId) {
+    public List<Task> findAllByProjectId(final Long projectId) {
         if (projectId == null) return Collections.emptyList();
         return taskRepository.findAllByProjectId(projectId);
     }

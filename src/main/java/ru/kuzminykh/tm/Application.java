@@ -3,8 +3,6 @@ package ru.kuzminykh.tm;
 import ru.kuzminykh.tm.controller.ProjectController;
 import ru.kuzminykh.tm.controller.SystemController;
 import ru.kuzminykh.tm.controller.TaskController;
-import ru.kuzminykh.tm.entity.Project;
-import ru.kuzminykh.tm.entity.Task;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 
 import ru.kuzminykh.tm.repository.TaskRepository;
@@ -20,7 +18,7 @@ import static ru.kuzminykh.tm.constant.TerminalConst.*;
  * Учебный проект в рамках курса Java.
  */
 
-public class App {
+public class Application {
 
     private final ProjectRepository projectRepository = new ProjectRepository();
 
@@ -32,7 +30,7 @@ public class App {
 
     private final ProjectTaskService projectTaskService = new ProjectTaskService(projectRepository, taskRepository);
 
-    private final ProjectController projectController = new ProjectController(projectService);
+    private final ProjectController projectController = new ProjectController(projectService, projectTaskService);
 
     private final TaskController taskController = new TaskController(taskService, projectTaskService);
 
@@ -49,7 +47,7 @@ public class App {
     }
 
     public static void main(final String[] args) {
-        final App app = new App();
+        final Application app = new Application();
         app.run(args);
         app.systemController.displayWelcome();
         app.process();

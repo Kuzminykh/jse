@@ -2,7 +2,6 @@ package ru.kuzminykh.tm.controller;
 
 public class SystemController {
 
-
     public int displayError() {
         System.out.println("Error! Unknown program argument...");
         return -1;

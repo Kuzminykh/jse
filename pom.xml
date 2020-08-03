@@ -43,7 +43,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ru.kuzminykh.tm.App</mainClass>
+                            <mainClass>ru.kuzminykh.tm.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
