@@ -70,6 +70,15 @@ java -jar target/task-manager-1.0.7.jar
  * task-list-by-project-id - Отображение списка задач по идентификатору проекта
  * task-add-to-project-by-ids - Добавить задачу в проект по идентификатору
  * task-remove-form-project-by-ids - Удалить задачу из проекта по идентификатору
+
+ * user-create - Создание пользователя c ролью USER
+ * user-create-admin - Создание пользователя с ролью ADMIN
+ * user-update-by-login - Изменение пользователя по логину
+ * user-remove-by-login - Удаление пользователя по логину
+ * user-view-by-login - Просмотр пользователя по логину
+ * user-list - Отображение списка пользователей
+ * user-clear - Удаление всех пользователей
+
 ```
  #
 - *`Настроено окружение для протокола SSH для отправки изменений в Git`*

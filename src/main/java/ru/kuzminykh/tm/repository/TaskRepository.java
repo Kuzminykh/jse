@@ -16,9 +16,7 @@ public class TaskRepository {
     }
 
     public Task create(final String name, final String description) {
-        final Task task = new Task();
-        task.setName(name);
-        task.setDescription(description);
+        final Task task = new Task(name, description);
         tasks.add(task);
         return task;
     }

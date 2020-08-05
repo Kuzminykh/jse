@@ -16,9 +16,7 @@ public class ProjectRepository {
     }
 
     public Project create(final String name, final String description) {
-        final Project project = new Project();
-        project.setName(name);
-        project.setDescription(description);
+        final Project project = new Project(name, description);
         projects.add(project);
         return project;
     }

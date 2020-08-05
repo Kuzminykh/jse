@@ -3,12 +3,15 @@ package ru.kuzminykh.tm;
 import ru.kuzminykh.tm.controller.ProjectController;
 import ru.kuzminykh.tm.controller.SystemController;
 import ru.kuzminykh.tm.controller.TaskController;
+import ru.kuzminykh.tm.controller.UserController;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 
 import ru.kuzminykh.tm.repository.TaskRepository;
+import ru.kuzminykh.tm.repository.UserRepository;
 import ru.kuzminykh.tm.service.ProjectService;
 import ru.kuzminykh.tm.service.ProjectTaskService;
 import ru.kuzminykh.tm.service.TaskService;
+import ru.kuzminykh.tm.service.UserService;
 
 import java.util.Scanner;
 
@@ -24,15 +27,21 @@ public class Application {
 
     private final TaskRepository taskRepository = new TaskRepository();
 
+    private final UserRepository userRepository = new UserRepository();
+
     private final ProjectService projectService = new ProjectService(projectRepository);
 
     private final TaskService taskService = new TaskService(taskRepository);
+
+    private final UserService userService = new UserService(userRepository);
 
     private final ProjectTaskService projectTaskService = new ProjectTaskService(projectRepository, taskRepository);
 
     private final ProjectController projectController = new ProjectController(projectService, projectTaskService);
 
     private final TaskController taskController = new TaskController(taskService, projectTaskService);
+
+    private final UserController userController = new UserController(userService);
 
     private final SystemController systemController = new SystemController();
 
@@ -44,6 +53,11 @@ public class Application {
         taskRepository.create("Test Task 1", "tsk01");
         taskRepository.create("Test Task 2", "tsk02");
         taskRepository.create("Test Task 3", "tsk03");
+
+        userRepository.create("user 1","111","Иванов", "Иван", "Иванович");
+        userRepository.create("user 2","222", "Петров", "Петр", "Петрович");
+        userRepository.create("user 3","333", "Васечкин", "Василий", "Васильевич");
+
     }
 
     public static void main(final String[] args) {
@@ -103,6 +117,14 @@ public class Application {
             case TASK_ADD_TO_PROJECT_BY_IDS: return taskController.addTaskToProjectByIds();
             case TASK_REMOVE_FROM_PROJECT_BY_IDS: return taskController.removeTaskFromProjectByIds();
             case TASK_LIST_BY_PROJECT_ID: return taskController.listTaskByProjectId();
+
+            case USER_CREATE: return userController.createUser();
+            case USER_CREATE_ADMIN: return userController.createUserAdmin();
+            case USER_UPDATE_LOGIN: return userController.updateUserBylogin();
+            case USER_REMOVE_LOGIN: return userController.removeUserByLogin();
+            case USER_VIEW_BY_LOGIN: return userController.viewUserByLogin();
+            case USER_LIST: return userController.listUser();
+            case USER_CLEAR: return userController.clearUsers();
 
             default: return systemController.displayError();
         }

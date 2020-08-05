@@ -11,6 +11,11 @@ public class Project {
     public Project() {
     }
 
+    public Project(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Project(String name) {
         this.name = name;
     }
