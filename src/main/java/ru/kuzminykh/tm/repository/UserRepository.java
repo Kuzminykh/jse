@@ -1,6 +1,7 @@
 package ru.kuzminykh.tm.repository;
 
 import ru.kuzminykh.tm.entity.User;
+import ru.kuzminykh.tm.enumerated.RoleEnam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,8 @@ public class UserRepository {
         return user;
     }
 
-    public User createAsAdmin(final String login, final String userPassword, final String firstName, final String secondName, final String middleName){
-        final User user = new User(login, userPassword, firstName, secondName, middleName, User.Role.ADMIN);
+    public User createAsAdmin(final String login, final String password, final String firstName, final String secondName, final String middleName){
+        final User user = new User(login, password, firstName, secondName, middleName, RoleEnam.Role.ADMIN);
         users.add(user);
         return user;
     }

@@ -1,10 +1,10 @@
 package ru.kuzminykh.tm.entity;
 
+
+import ru.kuzminykh.tm.enumerated.RoleEnam;
 import ru.kuzminykh.tm.utils.MD5Hash;
 
 public class User {
-
-    public enum Role {USER, ADMIN}
 
     private String login = "";
 
@@ -16,14 +16,14 @@ public class User {
 
     private String middleName = "";
 
-    private Role userRole;
+    private RoleEnam.Role userRole;
 
     public User() {
     }
 
-    public User(final String login, final String password, final String firstName, final String secondName, final String middleName, final Role userRole) {
+   public User(String login, String password, String firstName, String secondName, String middleName, RoleEnam.Role userRole) {
         this.login = login;
-        this.hashPassword = MD5Hash.getHash(password);
+        this.hashPassword = password;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
@@ -36,7 +36,7 @@ public class User {
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
-        this.userRole = Role.USER;
+        this.userRole = RoleEnam.Role.USER;
     }
 
     public String getLogin() {
@@ -79,11 +79,11 @@ public class User {
         this.middleName = middleName;
     }
 
-    public Role getUserRole() {
+    public RoleEnam.Role getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Role role) {
+    public void setUserRole(RoleEnam roleEnam) {
         this.userRole = userRole;
     }
 
