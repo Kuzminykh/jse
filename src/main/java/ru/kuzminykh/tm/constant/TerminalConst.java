@@ -35,9 +35,15 @@ public class TerminalConst {
 
     public static final String USER_CREATE = "user-create";
     public static final String USER_CREATE_ADMIN = "user-create-admin";
+    public static final String USER_UPDATE_INDEX = "user-update-by-index";
+    public static final String USER_UPDATE_ID = "user-update-by-id";
     public static final String USER_UPDATE_LOGIN = "user-update-by-login";
+    public static final String USER_REMOVE_INDEX = "user-remove-by-index";
+    public static final String USER_REMOVE_ID = "user-remove-by-id";
     public static final String USER_REMOVE_LOGIN = "user-remove-by-login";
-    public static final String USER_VIEW_BY_LOGIN = "user-view-by-login";
+    public static final String USER_VIEW_INDEX = "user-view-index";
+    public static final String USER_VIEW_ID = "user-view-id";
+    public static final String USER_VIEW_LOGIN = "user-view-login";
     public static final String USER_LIST = "user-list";
     public static final String USER_CLEAR = "user-clear";
 

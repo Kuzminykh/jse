@@ -50,8 +50,14 @@ public class SystemController {
 
         System.out.println("user-create - Create new user.");
         System.out.println("user-create-admin - Create user as admin.");
+        System.out.println("user-update-by-index - Update user by index.");
+        System.out.println("user-update-by-id - Update user by id.");
         System.out.println("user-update-by-login - Update user by login.");
+        System.out.println("user-remove-by-index - Remove user by index.");
+        System.out.println("user-remove-by-id - Remove user by id.");
         System.out.println("user-remove-by-login - Remove user by login.");
+        System.out.println("user-view-by-index- View user by idndex.");
+        System.out.println("user-view-by-id - View user by id.");
         System.out.println("user-view-by-login - View user by login.");
         System.out.println("user-list - Display list of users.");
         System.out.println("user-clear - Remove all user.");

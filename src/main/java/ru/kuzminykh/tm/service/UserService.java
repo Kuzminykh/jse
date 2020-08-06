@@ -1,10 +1,11 @@
 package ru.kuzminykh.tm.service;
 
 import ru.kuzminykh.tm.entity.User;
+import ru.kuzminykh.tm.enumerated.Role;
 import ru.kuzminykh.tm.repository.UserRepository;
+import ru.kuzminykh.tm.utils.HashMD5;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class UserService {
 
@@ -14,41 +15,73 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User create(final String login, final String password, final String firstName, final String secondName, final String middleName) {
+    public User create(final String login, final String password, final String firstName,
+                       final String lastName, final String middleName
+    ) {
         if (login == null || login.isEmpty()) return null;
         if (password == null || password.isEmpty()) return null;
         if (firstName == null || firstName.isEmpty()) return null;
-        if (secondName == null || secondName.isEmpty()) return null;
+        if (lastName == null || lastName.isEmpty()) return null;
         if (middleName == null || middleName.isEmpty()) return null;
-        return userRepository.create(login, password, firstName, secondName, middleName);
+        return userRepository.create(login, HashMD5.getHash(password), firstName, lastName, middleName);
     }
 
-    public User createAsAdmin(String login, String password, String firstName, String secondName, String middleName) {
+    public User create(String login, String password, String firstName,
+                       String lastName, String middleName, Role userRole
+    ) {
         if (login == null || login.isEmpty()) return null;
         if (password == null || password.isEmpty()) return null;
         if (firstName == null || firstName.isEmpty()) return null;
-        if (secondName == null || secondName.isEmpty()) return null;
+        if (lastName == null || lastName.isEmpty()) return null;
         if (middleName == null || middleName.isEmpty()) return null;
-        return userRepository.createAsAdmin(login, password, firstName, secondName, middleName);
+        return userRepository.create(login, HashMD5.getHash(password), firstName, lastName, middleName, userRole);
     }
 
-    public User findByLogin(String login) {
-        if (login == null || login.isEmpty()) return null;
-        return userRepository.findByLogin(login);
+     public User update(Long id, String login, String password, String firstName, String lastName, String middleName) {
+        final User user = findById(id);
+        if (user == null) return null;
+        user.setLogin(login);
+        user.setHashPassword(HashMD5.getHash(password));
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setMiddleName(middleName);
+        return user;
     }
 
-    public User update(String login, String password, String firstName, String secondName, String middleName) {
-        if (login == null || login.isEmpty()) return null;
-        if (password == null || password.isEmpty()) return null;
-        if (firstName == null || firstName.isEmpty()) return null;
-        if (secondName == null || secondName.isEmpty()) return null;
-        if (middleName == null || middleName.isEmpty()) return null;
-        return userRepository.update(login, password, firstName, secondName, middleName);
+    public User removeByIndex(int index) {
+        return userRepository.removeByIndex(index);
+    }
+
+    public User removeById(Long id) {
+        if (id == null) return null;
+        return userRepository.removeById(id);
     }
 
     public User removeByLogin(String login) {
         if (login == null || login.isEmpty()) return null;
         return userRepository.removeByLogin(login);
+    }
+
+    public boolean existsByLogin(String login) {
+        return userRepository.existsByLogin(login);
+    }
+
+    public boolean existsById(Long id) {
+        return userRepository.existsById(id);
+    }
+
+    public User findByIndex(int index) {
+        return userRepository.findByIndex(index);
+    }
+
+    public User findById(Long id) {
+        if (id == null) return null;
+        return userRepository.findById(id);
+    }
+
+    public User findByLogin(String login) {
+        if (login == null || login.isEmpty()) return null;
+        return userRepository.findByLogin(login);
     }
 
     public List<User> findALL() {

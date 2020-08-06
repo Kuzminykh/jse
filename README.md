@@ -73,8 +73,14 @@ java -jar target/task-manager-1.0.7.jar
 
  * user-create - Создание пользователя c ролью USER
  * user-create-admin - Создание пользователя с ролью ADMIN
+ * user-update-by-index - Изменение пользователя по индексу
+ * user-update-by-id - Изменение пользователя по идентификатору
  * user-update-by-login - Изменение пользователя по логину
+ * user-remove-by-index - Удаление пользователя по индексу
+ * user-remove-by-id - Удаление пользователя по идентификатору
  * user-remove-by-login - Удаление пользователя по логину
+ * user-view-by-index - Просмотр пользователя по индексу
+ * user-view-by-id - Просмотр пользователя по идентификатору
  * user-view-by-login - Просмотр пользователя по логину
  * user-list - Отображение списка пользователей
  * user-clear - Удаление всех пользователей

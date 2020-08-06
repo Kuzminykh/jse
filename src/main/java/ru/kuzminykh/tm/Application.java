@@ -4,6 +4,7 @@ import ru.kuzminykh.tm.controller.ProjectController;
 import ru.kuzminykh.tm.controller.SystemController;
 import ru.kuzminykh.tm.controller.TaskController;
 import ru.kuzminykh.tm.controller.UserController;
+import ru.kuzminykh.tm.enumerated.Role;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 
 import ru.kuzminykh.tm.repository.TaskRepository;
@@ -56,7 +57,7 @@ public class Application {
 
         userRepository.create("user 1","111","Иванов", "Иван", "Иванович");
         userRepository.create("user 2","222", "Петров", "Петр", "Петрович");
-        userRepository.create("user 3","333", "Васечкин", "Василий", "Васильевич");
+        userRepository.create("user 3","333", "Васечкин", "Василий", "Васильевич", Role.ADMIN);
 
     }
 
@@ -119,10 +120,16 @@ public class Application {
             case TASK_LIST_BY_PROJECT_ID: return taskController.listTaskByProjectId();
 
             case USER_CREATE: return userController.createUser();
-            case USER_CREATE_ADMIN: return userController.createUserAdmin();
+            case USER_CREATE_ADMIN: return userController.createUser(Role.ADMIN);
+            case USER_UPDATE_INDEX: return userController.updateUserByIndex();
+            case USER_UPDATE_ID: return userController.updateUserById();
             case USER_UPDATE_LOGIN: return userController.updateUserBylogin();
+            case USER_REMOVE_INDEX: return userController.removeUserByIndex();
+            case USER_REMOVE_ID: return userController.removeUserById();
             case USER_REMOVE_LOGIN: return userController.removeUserByLogin();
-            case USER_VIEW_BY_LOGIN: return userController.viewUserByLogin();
+            case USER_VIEW_INDEX: return userController.viewUserByIndex();
+            case USER_VIEW_ID: return userController.viewUserById();
+            case USER_VIEW_LOGIN: return userController.viewUserByLogin();
             case USER_LIST: return userController.listUser();
             case USER_CLEAR: return userController.clearUsers();
 

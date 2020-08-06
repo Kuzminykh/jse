@@ -3,7 +3,7 @@ package ru.kuzminykh.tm.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MD5Hash {
+public class HashMD5 {
 
     public static String getHash(String md5) {
         try {

@@ -1,42 +1,56 @@
 package ru.kuzminykh.tm.entity;
 
 
-import ru.kuzminykh.tm.enumerated.RoleEnam;
-import ru.kuzminykh.tm.utils.MD5Hash;
+import ru.kuzminykh.tm.enumerated.Role;
+import ru.kuzminykh.tm.utils.HashMD5;
 
 public class User {
 
-    private String login = "";
+    private Long id = System.nanoTime();
 
-    private String hashPassword = "";
+    private String login;
+
+    private String hashPassword;
 
     private String firstName = "";
 
-    private String secondName = "";
+    private String lastName = "";
 
     private String middleName = "";
 
-    private RoleEnam.Role userRole;
+    private Role userRole = Role.USER;
 
     public User() {
     }
 
-   public User(String login, String password, String firstName, String secondName, String middleName, RoleEnam.Role userRole) {
+    public User(final String login, final String userPassword, final String firstName,
+                final String lastName, final String middleName, final Role userRole
+
+    ) {
         this.login = login;
-        this.hashPassword = password;
+        this.hashPassword = HashMD5.getHash(userPassword);
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.middleName = middleName;
         this.userRole = userRole;
     }
 
-    public User(final String login, final String password, final String firstName, final String secondName, final String middleName) {
+    public User(final String login, final String userPassword, final String firstName,
+                final String lastName, final String middleName
+    ) {
         this.login = login;
-        this.hashPassword = MD5Hash.getHash(password);
+        this.hashPassword = HashMD5.getHash(userPassword);
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.middleName = middleName;
-        this.userRole = RoleEnam.Role.USER;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -52,7 +66,7 @@ public class User {
     }
 
     public void setHashPassword(String hashPassword) {
-        this.hashPassword = MD5Hash.getHash(hashPassword);
+        this.hashPassword = HashMD5.getHash(hashPassword);
     }
 
     public String getFirstName() {
@@ -63,12 +77,12 @@ public class User {
         this.firstName = fisrtName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getMiddleName() {
@@ -79,11 +93,11 @@ public class User {
         this.middleName = middleName;
     }
 
-    public RoleEnam.Role getUserRole() {
+    public Role getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(RoleEnam roleEnam) {
+    public void setUserRole(Role userRole) {
         this.userRole = userRole;
     }
 
