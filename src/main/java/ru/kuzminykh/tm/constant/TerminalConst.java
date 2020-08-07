@@ -7,6 +7,8 @@ public class TerminalConst {
     public static final String VERSION = "version";
     public static final String ABOUT = "about";
     public static final String EXIT = "exit";
+    public static final String LOG_IN = "login";
+    public static final String LOG_OUT = "logout";
 
     public static final String PROJECT_CREATE = "project-create";
     public static final String PROJECT_CLEAR = "project-clear";
@@ -46,5 +48,9 @@ public class TerminalConst {
     public static final String USER_VIEW_LOGIN = "user-view-login";
     public static final String USER_LIST = "user-list";
     public static final String USER_CLEAR = "user-clear";
+
+    public static final String USER_DISPLAY = "user-info";
+    public static final String USER_UPDATE = "user-update";
+    public static final String USER_UPDATE_PASSWORD = "user-update-password";
 
 }

@@ -1,13 +1,17 @@
 package ru.kuzminykh.tm.controller;
 
-import ru.kuzminykh.tm.entity.Task;
 import ru.kuzminykh.tm.entity.User;
 import ru.kuzminykh.tm.enumerated.Role;
 import ru.kuzminykh.tm.service.UserService;
+import ru.kuzminykh.tm.utils.HashMD5;
+
+import java.util.Arrays;
 
 public class UserController extends AbstractController {
 
     private final UserService userService;
+
+    public User user;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -128,7 +132,6 @@ public class UserController extends AbstractController {
         return 0;
     }
 
-
    public int removeUserByLogin() {
         System.out.println("[REMOVE USER BY LOGIN]");
         System.out.println("Please, enter user login:");
@@ -142,13 +145,15 @@ public class UserController extends AbstractController {
     public void viewUser(final User user) {
         if (user == null) return;
         System.out.println("[VIEW USER DETAIL]");
-        System.out.println("ID: "+ user.getId());
-        System.out.println("LOGIN: " + user.getLogin());
-        System.out.println("PASSWORD HASH: " + user.getHashPassword());
-        System.out.println("FIRST NAME: " + user.getFirstName());
-        System.out.println("LAST NAME: " + user.getLastName());
-        System.out.println("MIDDLE NAME: " + user.getMiddleName());
-        System.out.println("ROLE: " + user.getUserRole());
+        System.out.println(" ");
+        System.out.println("Id: "+ user.getId());
+        System.out.println("Login: " + user.getLogin());
+        System.out.println("Password HASH: " + user.getHashPassword());
+        System.out.println("Firstname: " + user.getFirstName());
+        System.out.println("Lastname: " + user.getLastName());
+        System.out.println("Middlename: " + user.getMiddleName());
+        System.out.println("Role: " + user.getUserRole());
+        System.out.println(" ");
         System.out.println("[OK]");
     }
 
@@ -156,6 +161,7 @@ public class UserController extends AbstractController {
         System.out.println("[UPDATE USER]");
         System.out.println("Please, enter user index:");
         if (!scanner.hasNextInt()) {
+
             scanner.nextLine();
             System.out.println("FAIL! IT'S NOT NUMBER");
             return -1;
@@ -210,6 +216,74 @@ public class UserController extends AbstractController {
             index++;
         }
         System.out.println();
+        System.out.println("[OK]");
+        return 0;
+    }
+
+    public int logIn() {
+        System.out.println("ENTER LOGIN: ");
+        final User user = userService.findByLogin(scanner.nextLine());
+        if (user == null) {
+            System.out.println("LOGIN IS NOT FOUND IN SYSTEM.");
+            return 0;
+        }
+        System.out.println("ENTER PASSWORD: ");
+        final String password = scanner.nextLine();
+        if (userService.userLogIn(user.getLogin(), password) == null){
+            System.out.println("[FAIL]");
+            return 0;
+        }
+        return 0;
+    }
+
+    public int displayUser() {
+        viewUser(userService.user);
+        return 0;
+    }
+
+    public int changePasswordUser(){
+        System.out.println("[CHANGE PASSWORD]");
+        System.out.println("PLEASE, ENTER LOGIN:");
+        final String login = scanner.nextLine();
+        System.out.println("PLEASE, ENTER OLD PASSWORD");
+        final String oldPassword = scanner.nextLine();
+        System.out.println("PLEASE, ENTER NEW PASSWORD");
+        final String newPassword = scanner.nextLine();
+        final User user = userService.findByLogin(login);
+        if (user == null) {
+            System.out.println("[FAIL]");
+            return 0;
+        }
+        if (!user.getHashPassword().equals(HashMD5.getHash(oldPassword))) {
+            System.out.println("[FAIL]");
+            return 0;
+        }
+        user.setHashPassword(newPassword);
+        System.out.println("[OK]");
+        return 0;
+    }
+
+    public int updateUser() {
+        if (userService.user == null) {
+            System.out.println("[FAIL]");
+        } else {
+            System.out.println("Please, enter user password:");
+            final String password = scanner.nextLine();
+            System.out.println("Please, enter user first name");
+            final String firstName = scanner.nextLine();
+            System.out.println("Please, enter user last name");
+            final String lastName = scanner.nextLine();
+            System.out.println("Please, enter user middle name");
+            final String middleName = scanner.nextLine();
+            userService.update(userService.user.getId(), userService.user.getLogin(), password, firstName, lastName, middleName);
+            System.out.println("[OK]");
+        }
+        return 0;
+    }
+
+    public int logOut() {
+        System.out.println("LOG OUT");
+        user = null;
         System.out.println("[OK]");
         return 0;
     }

@@ -4,6 +4,7 @@ import ru.kuzminykh.tm.controller.ProjectController;
 import ru.kuzminykh.tm.controller.SystemController;
 import ru.kuzminykh.tm.controller.TaskController;
 import ru.kuzminykh.tm.controller.UserController;
+import ru.kuzminykh.tm.entity.User;
 import ru.kuzminykh.tm.enumerated.Role;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 
@@ -14,6 +15,7 @@ import ru.kuzminykh.tm.service.ProjectTaskService;
 import ru.kuzminykh.tm.service.TaskService;
 import ru.kuzminykh.tm.service.UserService;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static ru.kuzminykh.tm.constant.TerminalConst.*;
@@ -59,12 +61,15 @@ public class Application {
         userRepository.create("user 2","222", "Петров", "Петр", "Петрович");
         userRepository.create("user 3","333", "Васечкин", "Василий", "Васильевич", Role.ADMIN);
 
+        userService.userLogIn("user 3","333");
     }
+
 
     public static void main(final String[] args) {
         final Application app = new Application();
         app.run(args);
         app.systemController.displayWelcome();
+        System.out.println(" ");
         app.process();
     }
 
@@ -93,6 +98,8 @@ public class Application {
             case ABOUT: return systemController.displayAbout();
             case HELP: return systemController.displayHelp();
             case EXIT: return systemController.displayExit();
+            case LOG_IN: return userController.logIn();
+            case LOG_OUT: return userController.logOut();
 
             case PROJECT_LIST: return projectController.listProject();
             case PROJECT_CREATE: return projectController.createProject();
@@ -132,6 +139,10 @@ public class Application {
             case USER_VIEW_LOGIN: return userController.viewUserByLogin();
             case USER_LIST: return userController.listUser();
             case USER_CLEAR: return userController.clearUsers();
+
+            case USER_DISPLAY: return userController.displayUser();
+            case USER_UPDATE: return userController.updateUser();
+            case USER_UPDATE_PASSWORD: return userController.changePasswordUser();
 
             default: return systemController.displayError();
         }

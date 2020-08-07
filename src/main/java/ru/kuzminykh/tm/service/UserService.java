@@ -11,6 +11,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    public User user;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -41,7 +43,7 @@ public class UserService {
         final User user = findById(id);
         if (user == null) return null;
         user.setLogin(login);
-        user.setHashPassword(HashMD5.getHash(password));
+        user.setHashPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setMiddleName(middleName);
@@ -60,6 +62,26 @@ public class UserService {
     public User removeByLogin(String login) {
         if (login == null || login.isEmpty()) return null;
         return userRepository.removeByLogin(login);
+    }
+
+
+    public User userLogIn(String login, String userPassword) {
+        User user = userRepository.findByLogin(login);
+        if (user == null) return null;
+        if (!user.getHashPassword().equals(HashMD5.getHash(userPassword))) return null;
+        this.user = user;
+        System.out.println(" ");
+        System.out.println("Welcome " + user.getFirstName() + " " +user.getLastName() + " " + user.getMiddleName());
+        System.out.println(" ");
+        return user;
+    }
+
+    public User userChangePassword(String login, String userOldPassword, String userNewPassword) {
+        User user = userRepository.findByLogin(login);
+        if (user == null) return null;
+        if (!user.getHashPassword().equals(HashMD5.getHash(userOldPassword))) return null;
+        user.setHashPassword(userNewPassword);
+        return user;
     }
 
     public boolean existsByLogin(String login) {

@@ -1,5 +1,7 @@
 package ru.kuzminykh.tm.controller;
 
+import ru.kuzminykh.tm.entity.User;
+
 public class SystemController {
 
     public int displayError() {
@@ -21,6 +23,8 @@ public class SystemController {
         System.out.println("about - Display developer info.");
         System.out.println("help - Display list of commands.");
         System.out.println("exit - Terminate console application.");
+        System.out.println("login - The end of the current session.");
+        System.out.println("logout - Terminate console application.");
         System.out.println();
         System.out.println("project-list - Display list of projects.");
         System.out.println("project-create - Create new project by name.");
@@ -61,6 +65,9 @@ public class SystemController {
         System.out.println("user-view-by-login - View user by login.");
         System.out.println("user-list - Display list of users.");
         System.out.println("user-clear - Remove all user.");
+        System.out.println("user-info - View the current user.");
+        System.out.println("user-update - Update the current user.");
+        System.out.println("user-update-password -  Change password.");
         System.out.println();
         return 0;
     }
