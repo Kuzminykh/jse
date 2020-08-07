@@ -24,6 +24,14 @@ public class ProjectService {
         return projectRepository.create(name, description);
     }
 
+    public Project create(final String name, final String description, final Long userId) {
+        if (name == null || name.isEmpty()) return null;
+        if (description == null || description.isEmpty()) return null;
+        if (userId == null) return null;
+        return projectRepository.create(name, description, userId);
+    }
+
+
     public Project update(final Long id, final String name, final String description) {
         if (id == null) return null;
         if (name == null || name.isEmpty()) return null;
@@ -63,8 +71,13 @@ public class ProjectService {
         return projectRepository.removeByName(name);
     }
 
-    public List<Project> findALL() {
-        return projectRepository.findALL();
+   public List<Project> findAllByUserId(final Long userId) {
+        if (userId == null) return null;
+        return projectRepository.findAllByUserId(userId);
+    }
+
+    public List<Project> findAll() {
+        return projectRepository.findAll();
     }
 
 }

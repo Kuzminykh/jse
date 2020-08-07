@@ -24,6 +24,13 @@ public class TaskService {
         return taskRepository.create(name, description);
     }
 
+    public Task create(final String name, final String description, final Long userId) {
+        if (name == null || name.isEmpty()) return null;
+        if (description == null || description.isEmpty()) return null;
+        if (userId == null) return null;
+        return taskRepository.create(name, description, userId);
+    }
+
     public Task update(final Long id, final String name, final String description) {
         if (id == null) return null;
         if (name == null || name.isEmpty()) return null;
@@ -63,8 +70,9 @@ public class TaskService {
         return taskRepository.removeByName(name);
     }
 
-    public List<Task> findALL() {
-        return taskRepository.findALL();
+    public List<Task> findAllByProjectId(final Long projectId) {
+        if (projectId == null) return null;
+        return taskRepository.findAllByProjectId(projectId);
     }
 
     public Task findByProjectIdAndId(Long projectId, Long id) {
@@ -72,9 +80,13 @@ public class TaskService {
         return taskRepository.findByProjectIdAndId(projectId, id);
     }
 
-    public List<Task> findAllByProjectId(Long projectId) {
-        if (projectId == null) return null;
-        return taskRepository.findAllByProjectId(projectId);
+    public List<Task> findAllByUserId(Long userId) {
+        if (userId == null) return null;
+        return taskRepository.findAllByUserId(userId);
+    }
+
+    public List<Task> findAll() {
+        return taskRepository.findAll();
     }
 
 }

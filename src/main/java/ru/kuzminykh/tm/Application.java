@@ -40,28 +40,29 @@ public class Application {
 
     private final ProjectTaskService projectTaskService = new ProjectTaskService(projectRepository, taskRepository);
 
-    private final ProjectController projectController = new ProjectController(projectService, projectTaskService);
+    private final ProjectController projectController = new ProjectController(projectService, projectTaskService, userService);
 
-    private final TaskController taskController = new TaskController(taskService, projectTaskService);
+    private final TaskController taskController = new TaskController(taskService, projectTaskService, userService);
 
     private final UserController userController = new UserController(userService);
 
     private final SystemController systemController = new SystemController();
 
     {
-        projectRepository.create("Demo Project 1", "prj01");
-        projectRepository.create("Demo Project 2", "prj02");
-        projectRepository.create("Demo Project 3", "prj03");
-
-        taskRepository.create("Test Task 1", "tsk01");
-        taskRepository.create("Test Task 2", "tsk02");
-        taskRepository.create("Test Task 3", "tsk03");
-
         userRepository.create("user 1","111","Иванов", "Иван", "Иванович");
         userRepository.create("user 2","222", "Петров", "Петр", "Петрович");
         userRepository.create("user 3","333", "Васечкин", "Василий", "Васильевич", Role.ADMIN);
 
         userService.userLogIn("user 3","333");
+
+        projectRepository.create("Demo Project 1", "prj01", userService.getUserLogInId());
+        projectRepository.create("Demo Project 2", "prj02", userService.getUserLogInId());
+        projectRepository.create("Demo Project 3", "prj03");
+
+        taskRepository.create("Test Task 1", "tsk01", userService.getUserLogInId());
+        taskRepository.create("Test Task 2", "tsk02");
+        taskRepository.create("Test Task 3", "tsk03");
+
     }
 
 

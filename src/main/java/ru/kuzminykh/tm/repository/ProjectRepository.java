@@ -3,7 +3,9 @@ package ru.kuzminykh.tm.repository;
 import ru.kuzminykh.tm.entity.Project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectRepository {
 
@@ -18,6 +20,12 @@ public class ProjectRepository {
     public Project create(final String name, final String description) {
         final Project project = new Project(name, description);
         projects.add(project);
+        return project;
+    }
+
+    public Project create(final String name, final String description, Long userId) {
+        final Project project = create(name, description);
+        project.setUserId(userId);
         return project;
     }
 
@@ -74,7 +82,17 @@ public class ProjectRepository {
         return task;
     }
 
-    public List<Project> findALL() {
+    public List<Project> findAllByUserId(final Long userId) {
+        final List<Project> result = new ArrayList<>();
+        for (final Project project : findAll()) {
+            final Long IdUser = project.getUserId();
+            if (IdUser == null) continue;
+            if (IdUser.equals(userId)) result.add(project);
+        }
+        return result;
+    }
+
+    public List<Project> findAll() {
         return projects;
     }
 

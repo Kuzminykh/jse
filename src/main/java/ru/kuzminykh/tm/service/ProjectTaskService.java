@@ -24,6 +24,7 @@ public class ProjectTaskService {
         return taskRepository.findAllByProjectId(projectId);
     }
 
+
     public Task removeTaskToProject(final Long projectId, final Long taskId){
         final  Task task = taskRepository.findByProjectIdAndId(projectId, taskId);
         if (task == null) return null;

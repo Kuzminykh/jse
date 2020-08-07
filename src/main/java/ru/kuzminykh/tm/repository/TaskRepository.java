@@ -1,9 +1,12 @@
 package ru.kuzminykh.tm.repository;
 
+import ru.kuzminykh.tm.entity.Project;
 import ru.kuzminykh.tm.entity.Task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class TaskRepository {
 
@@ -18,6 +21,12 @@ public class TaskRepository {
     public Task create(final String name, final String description) {
         final Task task = new Task(name, description);
         tasks.add(task);
+        return task;
+    }
+
+    public Task create(final String name, final String description, Long userId) {
+        final Task task = create(name, description);
+        task.setUserId(userId);
         return task;
     }
 
@@ -87,7 +96,7 @@ public class TaskRepository {
 
     public List<Task> findAllByProjectId(final Long projectId){
         final List<Task> result = new ArrayList<>();
-        for (final Task task: findALL()){
+        for (final Task task: findAll()){
             final Long idProject = task.getProjectId();
             if (idProject == null) continue;
             if (idProject.equals(projectId)) result.add(task);
@@ -95,8 +104,19 @@ public class TaskRepository {
         return result;
     }
 
-    public List<Task> findALL() {
+    public List<Task> findAllByUserId(final Long userId) {
+        final List<Task> result = new ArrayList<>();
+        for (final Task task : findAll()) {
+            final Long IdUser = task.getUserId();
+            if (IdUser == null) continue;
+            if (IdUser.equals(userId)) result.add(task);
+        }
+        return result;
+    }
+
+    public List<Task> findAll() {
         return tasks;
     }
+
 
 }

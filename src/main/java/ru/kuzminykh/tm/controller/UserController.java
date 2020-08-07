@@ -243,11 +243,11 @@ public class UserController extends AbstractController {
 
     public int changePasswordUser(){
         System.out.println("[CHANGE PASSWORD]");
-        System.out.println("PLEASE, ENTER LOGIN:");
+        System.out.println("Enter, user login:");
         final String login = scanner.nextLine();
-        System.out.println("PLEASE, ENTER OLD PASSWORD");
+        System.out.println("Please, enter OLD password");
         final String oldPassword = scanner.nextLine();
-        System.out.println("PLEASE, ENTER NEW PASSWORD");
+        System.out.println("Please, enter NEW password");
         final String newPassword = scanner.nextLine();
         final User user = userService.findByLogin(login);
         if (user == null) {
@@ -283,7 +283,7 @@ public class UserController extends AbstractController {
 
     public int logOut() {
         System.out.println("LOG OUT");
-        user = null;
+        userService.userLogOut();
         System.out.println("[OK]");
         return 0;
     }

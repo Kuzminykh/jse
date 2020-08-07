@@ -3,6 +3,7 @@ package ru.kuzminykh.tm.controller;
 import ru.kuzminykh.tm.entity.Task;
 import ru.kuzminykh.tm.service.ProjectTaskService;
 import ru.kuzminykh.tm.service.TaskService;
+import ru.kuzminykh.tm.service.UserService;
 
 import java.util.List;
 
@@ -12,9 +13,12 @@ public class TaskController extends AbstractController {
 
     private final ProjectTaskService projectTaskService;
 
-    public TaskController(TaskService taskService, ProjectTaskService projectTaskService) {
+    private final UserService userService;
+
+    public TaskController(TaskService taskService, ProjectTaskService projectTaskService, UserService userService) {
         this.taskService = taskService;
         this.projectTaskService = projectTaskService;
+        this.userService = userService;
     }
 
     public int createTask() {
@@ -23,7 +27,8 @@ public class TaskController extends AbstractController {
         final String name = scanner.nextLine();
         System.out.println("Please, enter task description:");
         final String description = scanner.nextLine();
-        taskService.create(name, description);
+        if (userService.user == null) taskService.create(name, description);
+        else taskService.create(name, description, userService.user.getId());
         System.out.println("[OK]");
         return 0;
     }
@@ -138,9 +143,10 @@ public class TaskController extends AbstractController {
 
     public int listTask() {
         System.out.println("[LIST TASK]");
-        viewTasks(taskService.findALL());
-        System.out.println();
-        System.out.println("[OK]");
+        List<Task> taskList;
+        if (userService.user == null) taskList = taskService.findAll();
+        else taskList = taskService.findAllByUserId(userService.user.getId());
+        viewTasks(taskList);
         return 0;
     }
 

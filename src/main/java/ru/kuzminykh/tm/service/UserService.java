@@ -13,6 +13,8 @@ public class UserService {
 
     public User user;
 
+    private Long userLogInId;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -64,16 +66,21 @@ public class UserService {
         return userRepository.removeByLogin(login);
     }
 
-
     public User userLogIn(String login, String userPassword) {
         User user = userRepository.findByLogin(login);
         if (user == null) return null;
         if (!user.getHashPassword().equals(HashMD5.getHash(userPassword))) return null;
         this.user = user;
+        this.setUserLogInId(user.getId());
         System.out.println(" ");
         System.out.println("Welcome " + user.getFirstName() + " " +user.getLastName() + " " + user.getMiddleName());
         System.out.println(" ");
         return user;
+    }
+
+    public void userLogOut(){
+        this.userLogInId = null;
+        this.user = null;
     }
 
     public User userChangePassword(String login, String userOldPassword, String userNewPassword) {
@@ -116,6 +123,14 @@ public class UserService {
 
     public void clear() {
         userRepository.clear();
+    }
+
+    public Long getUserLogInId() {
+        return userLogInId;
+    }
+
+    public void setUserLogInId(Long userLogInId) {
+        this.userLogInId = userLogInId;
     }
 
 }

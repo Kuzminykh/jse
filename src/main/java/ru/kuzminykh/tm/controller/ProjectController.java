@@ -1,10 +1,12 @@
 package ru.kuzminykh.tm.controller;
 
 import ru.kuzminykh.tm.entity.Task;
+import ru.kuzminykh.tm.entity.User;
 import ru.kuzminykh.tm.repository.ProjectRepository;
 import ru.kuzminykh.tm.entity.Project;
 import ru.kuzminykh.tm.service.ProjectService;
 import ru.kuzminykh.tm.service.ProjectTaskService;
+import ru.kuzminykh.tm.service.UserService;
 
 import java.util.List;
 
@@ -14,9 +16,12 @@ public class ProjectController extends AbstractController {
 
     private final ProjectTaskService projectTaskService;
 
-    public ProjectController(ProjectService projectService, ProjectTaskService projectTaskService) {
+    private  final UserService userService;
+
+    public ProjectController(ProjectService projectService, ProjectTaskService projectTaskService, UserService userService) {
         this.projectService = projectService;
         this.projectTaskService = projectTaskService;
+        this.userService = userService;
     }
 
     public int createProject() {
@@ -25,8 +30,9 @@ public class ProjectController extends AbstractController {
         final String name = scanner.nextLine();
         System.out.println("Please, enter project description:");
         final String description = scanner.nextLine();
-        projectService.create(name, description);
-        System.out.println("[OK]");
+        if (userService.user == null) projectService.create(name, description);
+        else projectService.create(name, description, userService.user.getId());
+       System.out.println("[OK]");
         return 0;
     }
 
@@ -116,18 +122,6 @@ public class ProjectController extends AbstractController {
         return 0;
     }
 
-    public int listProject() {
-        System.out.println("[LIST PROJECT]");
-        int index = 1;
-        for (final Project project : projectService.findALL()) {
-            System.out.println(index + ". " + project.getId() + ": " + project.getName() + " (Description: " + project.getDescription() + ")");
-            index++;
-        }
-        System.out.println();
-        System.out.println("[OK]");
-        return 0;
-    }
-
     public void viewProject(Project project) {
         if (project == null) return;
         System.out.println("[VIEW PROJECT]");
@@ -155,6 +149,20 @@ public class ProjectController extends AbstractController {
         final Long id = scanner.nextLong();
         final Project project = projectService.findById(id);
         viewProject(project);
+        return 0;
+    }
+
+   public int listProject() {
+        System.out.println("[LIST PROJECT]");
+        int index = 1;
+        List<Project> projectList;
+        if (userService.user == null) projectList = projectService.findAll();
+        else projectList = projectService.findAllByUserId(userService.user.getId());
+        for (final Project project : projectList) {
+            System.out.println(index + ". " + project.getId() + ": " + project.getName());
+            index++;
+        }
+        System.out.println("[OK]");
         return 0;
     }
 
